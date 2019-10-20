@@ -1,6 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 
+import credentials
+
+consumer_secret = credentials.login['consumer_secret']
 
 def notify(data,email):
 
@@ -8,10 +11,10 @@ def notify(data,email):
     host = 'smtp.gmail.com'
     port = 465
     # username ou email para logar no servidor
-    username = 'spaceapps.saci@gmail.com'
-    password = 'curupira'
+    username = consumer_secret['username']
+    password = consumer_secret['password']
 
-    from_addr = 'spaceapps.saci@gmail.com'
+    from_addr = username
     to_addrs = [email]
 
     message = MIMEText('Hello World')

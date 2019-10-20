@@ -1,15 +1,17 @@
 import csv
 
-def analyze(name):
-    data = []
-    with open(name, "r") as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        line_count = 0
-        for line in csv_reader:
-            if line_count != 0:
-                lat = line[0]
-                lon = line[1]
-                data.append((lat, lon))
-            line_count+=1
+from utils import reverseGeocode
+
+def analyze(data):
+    data = filter_brasil_data(data)
+
     return data
 
+def filter_brasil_data(coordinates):
+    data = []
+    for item in coordinates:
+        result = reverseGeocode(item)
+        if result[0]['cc'] == 'BR':
+            data.append([result[0]['lat'], result[0]['lon'], result[0]['name'], result[0]['admin1']])
+    
+    return data
