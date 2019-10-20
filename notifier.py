@@ -3,15 +3,14 @@ from email.mime.text import MIMEText
 
 import credentials
 
-consumer_secret = credentials.login['consumer_secret']
 
-def notify(data,email):
-    # servidores do google
+def notify(data, email):
     host = 'smtp.gmail.com'
     port = 465
-    # username ou email para logar no servidor
-    username = consumer_secret['username']
-    password = consumer_secret['password']
+
+    username = credentials.login['username']
+    password = credentials.login['password']
+
 
     from_addr = username
     to_addrs = [email]
@@ -21,9 +20,7 @@ def notify(data,email):
     message['from'] = from_addr
     message['to'] = ', '.join(to_addrs)
 
-    # conectaremos de forma segura usando SSL
     server = smtplib.SMTP_SSL(host, port)
-    # login servidor externo
     server.login(username, password)
     server.sendmail(from_addr, to_addrs, message.as_string())
     server.quit()
