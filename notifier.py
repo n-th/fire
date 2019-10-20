@@ -15,8 +15,8 @@ def notify(data, email):
     from_addr = username
     to_addrs = [email]
 
-    message = MIMEText('Atenção!\nIdentificamos um foco de incêndio em sua cidade na seguinte localização (%s, %s).\nPara mais informações, acesse: <link_maps>.\nDados obtidos via Nasa-FIRMS(Informações sobre incêndio para sistema de gerenciamento de recursos). \n\nEquipe Saci - Nasa Space Apps'% (data[0],data[1])) 
-    message['subject'] = 'Atenção cidade de %s-%s' % (data[2],data[3])
+    message = MIMEText('Identificamos um foco de incêndio em sua cidade nas seguintes localização (%s, %s), segundo dados obtidos via Nasa-FIRMS(Informações sobre incêndio para sistema de gerenciamento de recursos). \n\nEquipe Saci - Nasa Space Apps'% (data[0],data[1])) 
+    message['subject'] = 'Atenção, %s (%s)' % (data[2],data[3])
     message['from'] = from_addr
     message['to'] = ', '.join(to_addrs)
 
